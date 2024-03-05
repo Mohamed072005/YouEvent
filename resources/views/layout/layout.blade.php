@@ -139,10 +139,15 @@
         }
 
         .widget .widget-meeting-action {
-            text-align: right;
+            display: flex;
+            justify-content: end;
         }
 
-        .widget .widget-meeting-action a {
+        .widget .widget-meeting-action form button{
+            text-transform: uppercase;
+        }
+
+        .widget .widget-meeting-action div button{
             text-transform: uppercase;
         }
 
@@ -173,7 +178,7 @@
 <header class="p-2 bg-body-tertiary">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="w-25">
-            <a href="" class="navbar-brand"><h2 class="">YouEvent</h2></a>
+            <a href="{{ route('home') }}" class="navbar-brand"><h2 class="">YouEvent</h2></a>
         </div>
 
         <div class="w-50 d-flex justify-content-evenly align-items-center">
@@ -218,10 +223,10 @@
             <div class="">
                 <aside class="aside p-2">
                     <div class="">
-                        <a><h4 class="">settings</h4></a>
+                        <a><h4 class="">Home</h4></a>
                     </div>
                     <div class="">
-                        <a><h4 class="">settings</h4></a>
+                        <a class="navbar-brand" href="{{ route('get.categorie') }}"><h4 class="">Categories</h4></a>
                     </div>
                     <div class="">
                         <a><h4 class="">settings</h4></a>
