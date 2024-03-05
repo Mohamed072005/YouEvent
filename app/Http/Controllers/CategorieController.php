@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class CategorieController extends Controller
 {
     //
+    public function home()
+    {
+        return view('home');
+    }
     public function index()
     {
         return view('createCategorie');
@@ -24,7 +28,13 @@ class CategorieController extends Controller
 //        $response = Categorie::all();
 //
 //        return response()->json($response);
-        return redirect()->route('to.add.categorie')->with('addSuccess', 'Your Category Created Successfully');
+        return redirect()->route('to.add.categorie')->with('addSuccess', 'Your Categorie Created Successfully');
+    }
+
+    public function getCategorie()
+    {
+        $categories = Categorie::all();
+        return view('categorie', compact('categories'));
     }
 
     public function destroy($id)
@@ -32,14 +42,15 @@ class CategorieController extends Controller
         $categorie = Categorie::find($id);
         $categorie->delete();
         if ($categorie){
-            return response()->json('delete success');
+            return redirect()->route('get.categorie')->with('successResponse', 'Your Categorie Deleted Successfully');
         }else{
-            return response()->json('wrong');
+            return redirect()->route('get.categorie')->with('warningResponse', 'Warning');
         }
     }
 
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'categorie_name' => ['required', 'unique:categories']
         ]);
@@ -49,7 +60,6 @@ class CategorieController extends Controller
             'categorie_name' => $request->categorie_name
         ]);
 
-        $categorie2 = Categorie::find($id);
-        return response()->json($categorie2);
+        return redirect()->route('get.categorie')->with('successResponse', 'Your Categorie Updated Successfully');
     }
 }

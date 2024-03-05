@@ -25,7 +25,11 @@ Route::post('/email', [AuthController::class, 'sendResetLinkEmail'])->name('pass
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
+Route::get('/home', [CategorieController::class, 'home'])->name('home');
 
 Route::get('/categorie', [CategorieController::class, 'index'])->name('to.add.categorie');
 Route::post('/create/categorie', [CategorieController::class, 'store'])->name('add.categorie');
+Route::get('/categories', [CategorieController::class, 'getCategorie'])->name('get.categorie');
+Route::delete('/destroy/categorie/{id}', [CategorieController::class, 'destroy'])->name('destroy.categorie');
+Route::put('/update/categorie/{id}', [CategorieController::class, 'update'])->name('update.categorie');
 
