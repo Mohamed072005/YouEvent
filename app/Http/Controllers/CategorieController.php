@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 class CategorieController extends Controller
 {
     //
-    public function home()
-    {
-        return view('home');
-    }
     public function index()
     {
         return view('createCategorie');

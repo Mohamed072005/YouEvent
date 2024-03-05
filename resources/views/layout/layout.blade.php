@@ -82,31 +82,6 @@
             text-transform: uppercase;
         }
 
-        .widget .widget-title-wrapper .widget-date-warning {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: floralwhite;
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-        }
-
-        .widget .widget-title-wrapper .widget-date-warning .widget-date-day {
-            color: #FFC868;
-            font-weight: 500;
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .widget .widget-title-wrapper .widget-date-warning .widget-date-month {
-            color: #FFC868;
-            line-height: 1;
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-
         .widget .widget-title-wrapper .widget-meeting-info {
             display: flex;
             flex-direction: column;
@@ -183,7 +158,7 @@
 
         <div class="w-50 d-flex justify-content-evenly align-items-center">
             <div class="">
-                <a href="" class="navbar-brand"><h5 class="mt-2">Create Event</h5></a>
+                <a href="{{ route('to.add.event') }}" class="navbar-brand"><h5 class="mt-2">Create Event</h5></a>
             </div>
             <div class="">
                 <a href="{{ route('to.add.categorie') }}" class="navbar-brand"><h5 class="mt-2">Create Categorie</h5></a>
@@ -223,7 +198,7 @@
             <div class="">
                 <aside class="aside p-2">
                     <div class="">
-                        <a><h4 class="">Home</h4></a>
+                        <a class="navbar-brand" href=""><h4 class="">Home</h4></a>
                     </div>
                     <div class="">
                         <a class="navbar-brand" href="{{ route('get.categorie') }}"><h4 class="">Categories</h4></a>

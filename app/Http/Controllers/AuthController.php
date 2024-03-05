@@ -63,7 +63,7 @@ class AuthController extends Controller
                 'role_id' => $userInfo->role_id,
                 'user_name' => $userInfo->name
             ]);
-            return view('home');
+            return redirect()->route('home');
         }else{
             return redirect()->route('login')->with('errorLogin', 'Invalid email or password');
         }

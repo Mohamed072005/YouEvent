@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +26,15 @@ Route::post('/email', [AuthController::class, 'sendResetLinkEmail'])->name('pass
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-Route::get('/home', [CategorieController::class, 'home'])->name('home');
+Route::get('/home', [EventController::class, 'getEvents'])->name('home');
 
 Route::get('/categorie', [CategorieController::class, 'index'])->name('to.add.categorie');
-Route::post('/create/categorie', [CategorieController::class, 'store'])->name('add.categorie');
+Route::post('/categories', [CategorieController::class, 'store'])->name('add.categorie');
 Route::get('/categories', [CategorieController::class, 'getCategorie'])->name('get.categorie');
 Route::delete('/destroy/categorie/{id}', [CategorieController::class, 'destroy'])->name('destroy.categorie');
 Route::put('/update/categorie/{id}', [CategorieController::class, 'update'])->name('update.categorie');
+
+
+Route::get('/event', [EventController::class, 'index'])->name('to.add.event');
+Route::post('/events', [EventController::class, 'store'])->name('add.event');
 
