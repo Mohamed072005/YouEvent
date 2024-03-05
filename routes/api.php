@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('toregister', [AuthController::class, 'register']);
+Route::post('/create/categorie', [CategorieController::class, 'store']);
+Route::get('/destroy/categorie/{id}', [CategorieController::class, 'destroy']);
+Route::put('/update/categorie/{id}', [CategorieController::class, 'update']);
