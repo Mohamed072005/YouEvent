@@ -60,9 +60,9 @@ class EventController extends Controller
         return view('home', compact('events'));
     }
 
-    public function eventDetails(Request $request)
+    public function eventDetails($id)
     {
-        $eventId = $request->event_id;
+        $eventId = $id;
         $event = Event::find($eventId);
         $categories = Categorie::all();
 
@@ -84,5 +84,38 @@ class EventController extends Controller
         return redirect()->route('home')->with('successResponse', 'Your Event Deleted Successfully');
     }
 
+    public function update(Request $request, $id)
+    {
+        if (session('user_id') == null){
+            return redirect()->route('login')->with('errorLogin', 'You should have account to this action');
+        }
+        $request->validate([
+            'title' => ['required', 'unique:events'],
+            'description' => 'required',
+            'date' => ['required', 'date'],
+            'acceptation' => 'required',
+            'categorie' => 'required',
+            'localisation'=> 'required',
+            'tickets' => ['required', 'integer', 'gt:0']
+        ]);
 
+        if ($request->acceptation == 1){
+            $acceptation = true;
+        }else {
+            $acceptation = false;
+        }
+        $evenet = Event::find($id);
+
+            $evenet->update([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'acceptation' => $acceptation,
+                'categorie_id' => $request->input('categorie'),
+                'date' => $request->input('date'),
+                'localisation' => $request->input('localisation'),
+                'number_of_seats' => $request->input('tickets')
+            ]);
+
+            return redirect()->route('event.details', $id)->with('actionResponse', 'Your Event Updated Successfully');
+    }
 }

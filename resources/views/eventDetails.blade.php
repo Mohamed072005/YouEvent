@@ -42,7 +42,6 @@
                                     </form>
                                 </div>
                                 <div class="col-lg-4 d-flex justify-content-center">
-                                    <form action="">
                                         <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal">
                                             Update
                                         </button>
@@ -55,41 +54,42 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="" method="post" class=" w-50">
+                                                        <form action="{{ route('update.event', $event->id) }}" method="post" class="">
                                                             @csrf
-                                                            @method('PUT')
+                                                            @method('PATCH')
+                                                            <input type="hidden" id="describInput" value="{{ $event->description }}">
                                                             <div class="form-floating d-flex flex-column align-items-center mb-2">
-                                                                <input type="text" name="title" id="floatingInput1" placeholder="#" class="rounded w-100 form-control form-control-lg">
+                                                                <input type="text" name="title" id="floatingInput1" placeholder="#" value="{{ $event->title }}" class="rounded w-100 form-control form-control-lg">
                                                                 <label for="floatingInput1">Event Title</label>
                                                             </div>
                                                             <div class="form-floating d-flex flex-column align-items-center mb-2">
-                                                                <textarea class="form-control" name="description" placeholder="#" id="floatingTextarea2" style="height: 70px"></textarea>
+                                                                <textarea class="form-control" name="description" placeholder="#" id="floatingTextarea1" style="height: 70px"></textarea>
                                                                 <label for="floatingTextarea2">Description</label>
                                                             </div>
                                                             <div class="form-floating d-flex flex-column align-items-center mb-2">
-                                                                <input type="text" name="localisation" id="floatingInput2" class="rounded w-100 form-control form-control-lg" placeholder="#">
+                                                                <input type="text" name="localisation" id="floatingInput2" value="{{ $event->localisation }}"  class="rounded w-100 form-control form-control-lg" placeholder="#">
                                                                 <label for="floatingInput2">Location</label>
                                                             </div>
                                                             <div class="form-floating d-flex flex-column align-items-center mb-2">
-                                                                <input type="date" name="date" id="floatingInput3" class="rounded w-100 form-control form-control-lg" placeholder="#">
+                                                                <input type="date" name="date" id="floatingInput3" value="{{ $event->date }}" class="rounded w-100 form-control form-control-lg" placeholder="#">
                                                                 <label for="floatingInput3">Event Date</label>
                                                             </div>
                                                             <div class="form-floating d-flex flex-column align-items-center mb-2">
-                                                                <input type="number" min="1" name="tickets" id="floatingInput34" class="rounded w-100 form-control form-control-lg" placeholder="#">
+                                                                <input type="number" min="1" name="tickets" id="floatingInput34" value="{{ $event->number_of_seats }}" class="rounded w-100 form-control form-control-lg" placeholder="#">
                                                                 <label for="floatingInput4">Number Of Tickets</label>
                                                             </div>
                                                             <div class="mb-2 mt-2">
-                                                                <label>acceptation</label>
+                                                                <label>acceptation:</label>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="acceptation" value="1" id="flexRadioDefault1" checked>
+                                                                <div class="form-check ml-5">
+                                                                    <input class="form-check-input" type="radio" name="acceptation" value="1" id="flexRadioDefault1" >
                                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                                         On
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="acceptation" value="0" id="flexRadioDefault2" >
+                                                                    <input class="form-check-input" type="radio" name="acceptation" value="0" id="flexRadioDefault2" checked>
                                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                                         Off
                                                                     </label>
@@ -120,7 +120,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+
                                 </div>
                                 <div class="col-lg-4 d-flex justify-content-center">
                                     <form action="">
@@ -149,5 +149,36 @@
             </div>
         </div>
     </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let describArea = document.getElementById('floatingTextarea1');
+            let describInput = document.getElementById('describInput').value;
+            describArea.value = describInput;
+        </script>
+
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <script>
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "warning",
+                        title: "{{ $error }}",
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
+            @endforeach
+        @endif
+        @if(!session('actionResponse') == null)
+            <script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "{{ session('actionResponse') }}",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            </script>
+    @endif
 
 @endsection
