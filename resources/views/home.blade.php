@@ -27,11 +27,12 @@
                                     <li class="widget-meeting-item"><span>The Categorie: {{ $event->categorie->categorie_name }}</span></li>
                                 </ul>
                                 <div class="widget-meeting-action">
-                                    <form action="{{ route('event.details') }}" method="get">
-                                        @csrf
-                                        <input type="hidden" value="{{ $event->id }}" name="event_id">
-                                        <button type="submit" class="btn btn-sm btn-flash-border-primary">View All</button>
-                                    </form>
+{{--                                    <form action="{{ route('event.details') }}" method="get">--}}
+{{--                                        @csrf--}}
+{{--                                        <input type="hidden" value="{{ $event->id }}" name="event_id">--}}
+{{--                                        <button type="submit" class="btn btn-sm btn-flash-border-primary">View All</button>--}}
+{{--                                    </form>--}}
+                                    <a href="{{ route('event.details', $event->id) }}" class="btn btn-sm btn-flash-border-primary">View All</a>
                                 </div>
                             </div>
                         </div>

@@ -37,6 +37,7 @@ Route::put('/update/categorie/{id}', [CategorieController::class, 'update'])->na
 
 Route::get('/event', [EventController::class, 'index'])->name('to.add.event');
 Route::post('/events', [EventController::class, 'store'])->name('add.event');
-Route::get('/details', [EventController::class, 'eventDetails'])->name('event.details');
+Route::get('/details/{id}', [EventController::class, 'eventDetails'])->name('event.details');
 Route::delete('/destroy/event/{id}', [EventController::class, 'destroy'])->name('delete.event');
+Route::patch('/update/event/{id}', [EventController::class, 'update'])->name('update.event');
 
