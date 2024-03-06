@@ -28,17 +28,37 @@
                     <input type="number" min="1" name="tickets" id="floatingInput34" class="rounded w-100 form-control form-control-lg" placeholder="#">
                     <label for="floatingInput4">Number Of Tickets</label>
                 </div>
+                <div class="mb-2 mt-2">
+                    <label>acceptation</label>
+                </div>
+                <div class="row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="acceptation" value="1" id="flexRadioDefault1" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            On
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="acceptation" value="0" id="flexRadioDefault2" >
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Off
+                        </label>
+                    </div>
+                </div>
                 <div class="mb-2">
                     <label>Categories:</label>
                 </div>
-                @foreach($categories as $categorie)
-                <div class="form-check d-flex align-items-center mb-2">
-                    <input class="form-check-input" type="radio" name="categorie" value="{{ $categorie->id }}" id="{{ $categorie->id }}">
-                    <label class="form-check-label" for="{{ $categorie->id }}">
-                        {{ $categorie->categorie_name }}
-                    </label>
+
+                <div class="row">
+                    @foreach($categories as $categorie)
+                        <div class="col-4 form-check ">
+                            <input class="form-check-input" type="radio" name="categorie" value="{{ $categorie->id }}" id="{{ $categorie->id }}">
+                            <label class="form-check-label" for="{{ $categorie->id }}">
+                                {{ $categorie->categorie_name }}
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
                 <div class="d-flex justify-content-center mt-4 mb-3">
                     <button class="btn btn-outline-primary">Create</button>
                 </div>

@@ -90,7 +90,7 @@
 
         .widget .widget-title-wrapper .widget-meeting-info .widget-pro-title {
             color: #3c4142;
-            font-size: 14px;
+            /*font-size: 14px;*/
         }
 
         .widget .widget-title-wrapper .widget-meeting-info .widget-meeting-time {
@@ -158,6 +158,9 @@
 
         <div class="w-50 d-flex justify-content-evenly align-items-center">
             <div class="">
+                <a href="{{ route('home') }}" class="navbar-brand"><h5 class="mt-2">Home</h5></a>
+            </div>
+            <div class="">
                 <a href="{{ route('to.add.event') }}" class="navbar-brand"><h5 class="mt-2">Create Event</h5></a>
             </div>
             <div class="">
@@ -198,7 +201,7 @@
             <div class="">
                 <aside class="aside p-2">
                     <div class="">
-                        <a class="navbar-brand" href=""><h4 class="">Home</h4></a>
+                        <a class="navbar-brand" href="{{ route('home') }}"><h4 class="">Home</h4></a>
                     </div>
                     <div class="">
                         <a class="navbar-brand" href="{{ route('get.categorie') }}"><h4 class="">Categories</h4></a>

@@ -15,7 +15,8 @@ class Event extends Model
         'user_id',
         'categorie_id',
         'localisation',
-        'number_of_seats'
+        'number_of_seats',
+        'acceptation'
     ];
     public function categorie()
     {

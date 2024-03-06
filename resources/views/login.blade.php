@@ -51,6 +51,19 @@
     </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <script>
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "{{ $error }}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+        </script>
+    @endforeach
+@endif
 @if(session('errorLogin'))
     <script>
         Swal.fire({
