@@ -15,7 +15,6 @@ class Event extends Model
         'user_id',
         'categorie_id',
         'localisation',
-        'number_of_seats',
         'acceptation'
     ];
     public function categorie()
@@ -26,5 +25,10 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

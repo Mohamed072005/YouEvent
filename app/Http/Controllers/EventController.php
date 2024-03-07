@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Event;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -27,8 +28,7 @@ class EventController extends Controller
             'date' => ['required', 'date'],
             'acceptation' => 'required',
             'categorie' => 'required',
-            'localisation'=> 'required',
-            'tickets' => ['required', 'integer', 'gt:0']
+            'localisation'=> 'required'
         ]);
 
         if ($request->acceptation == 1){
@@ -40,18 +40,17 @@ class EventController extends Controller
         }
 //        dd($acceptation);
 
-        Event::create([
+        $event = Event::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'user_id' => session('user_id'),
             'acceptation' => $acceptation,
             'categorie_id' => $request->input('categorie'),
             'date' => $request->input('date'),
-            'localisation' => $request->input('localisation'),
-            'number_of_seats' => $request->input('tickets')
+            'localisation' => $request->input('localisation')
         ]);
 
-        return redirect()->route('to.add.event')->with('addSuccess', 'Your Event Created Successfully');
+        return redirect()->route('to.add.ticket', $event->id)->with('addSuccess', 'Your Should add the Tickets');
     }
 
     public function getEvents()
@@ -64,9 +63,10 @@ class EventController extends Controller
     {
         $eventId = $id;
         $event = Event::find($eventId);
+        $tickets = Ticket::all()->where('event_id', $eventId);
         $categories = Categorie::all();
 
-        return view('eventDetails', compact('event', 'categories'));
+        return view('eventDetails', compact('event', 'categories', 'tickets'));
     }
 
     public function destroy(Request $request, $id)
@@ -95,8 +95,7 @@ class EventController extends Controller
             'date' => ['required', 'date'],
             'acceptation' => 'required',
             'categorie' => 'required',
-            'localisation'=> 'required',
-            'tickets' => ['required', 'integer', 'gt:0']
+            'localisation'=> 'required'
         ]);
 
         if ($request->acceptation == 1){
@@ -112,8 +111,7 @@ class EventController extends Controller
                 'acceptation' => $acceptation,
                 'categorie_id' => $request->input('categorie'),
                 'date' => $request->input('date'),
-                'localisation' => $request->input('localisation'),
-                'number_of_seats' => $request->input('tickets')
+                'localisation' => $request->input('localisation')
             ]);
 
             return redirect()->route('event.details', $id)->with('actionResponse', 'Your Event Updated Successfully');

@@ -21,7 +21,6 @@ class CreateEventsTable extends Migration
             $table->string('localisation');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('categorie_id')->constrained()->onDelete('cascade');
-            $table->integer('number_of_seats');
             $table->boolean('acceptation');
             $table->boolean('status')->default(0);
             $table->timestamps();

@@ -172,7 +172,11 @@
         </div>
         <div class="dropdown">
             <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                actions
+                @if(!session('user_name') == null)
+                    {{ session('user_name') }}
+                @else
+                    actions
+                @endif
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 
