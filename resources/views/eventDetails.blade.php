@@ -33,6 +33,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row d-flex justify-content-center">
+                            @if(session('user_id') == $event->user_id)
                             <div class="col-lg-4 d-flex justify-content-center">
                                 <form action="{{ route('delete.event', $event->id) }}" method="post">
                                     @csrf
@@ -122,6 +123,7 @@
                                 </div>
 
                             </div>
+                            @endif
                             <div class="col-lg-4 d-flex justify-content-center">
                                 <form action="">
                                     <button class="btn btn-outline-success">Reserve</button>

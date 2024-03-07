@@ -31,14 +31,16 @@ class EventController extends Controller
             'localisation'=> 'required'
         ]);
 
+        if($request->date < date('Y-m-d')){
+            return redirect()->route('to.add.event')->with('errorDate', 'You trying to insert a invalid date!!');
+        }
+
         if ($request->acceptation == 1){
             $acceptation = true;
 
         }else {
             $acceptation = false;
-
         }
-//        dd($acceptation);
 
         $event = Event::create([
             'title' => $request->input('title'),
