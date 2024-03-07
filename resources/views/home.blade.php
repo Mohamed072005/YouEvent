@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('content')
     <div>
+        {{ date('Y-m-d') }}
         <div class="container mt-3">
             <div class="row">
                 @foreach($events as $event)

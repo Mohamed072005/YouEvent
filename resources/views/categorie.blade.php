@@ -23,12 +23,6 @@
                                         <span class="widget-meeting-time">12:00 to 13.30 Hrs</span>
                                     </div>
                                 </div>
-
-{{--                                <ol class="widget-meeting-points">--}}
-{{--                                    <li class="widget-meeting-item"><span>Expand module is removed</span></li>--}}
-{{--                                    <li class="widget-meeting-item"><span>Data migration is in scope</span></li>--}}
-{{--                                    <li class="widget-meeting-item"><span>Session timeout increase to 30 minutes</span></li>--}}
-{{--                                </ol>--}}
                                 <div class="widget-meeting-action">
                                     <form action="{{ route('destroy.categorie', $cateInfo->id) }}" method="post">
                                         @csrf

@@ -76,12 +76,12 @@
             </script>
         @endforeach
     @endif
-    @if(!session('addSuccess') == null)
+    @if(!session('errorDate') == null)
         <script>
             Swal.fire({
                 position: "top-end",
-                icon: "success",
-                title: "{{ session('addSuccess') }}",
+                icon: "warning",
+                title: "{{ session('errorDate') }}",
                 showConfirmButton: false,
                 timer: 3000
             });
