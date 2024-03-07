@@ -95,8 +95,7 @@ class EventController extends Controller
             'date' => ['required', 'date'],
             'acceptation' => 'required',
             'categorie' => 'required',
-            'localisation'=> 'required',
-            'tickets' => ['required', 'integer', 'gt:0']
+            'localisation'=> 'required'
         ]);
 
         if ($request->acceptation == 1){
@@ -112,8 +111,7 @@ class EventController extends Controller
                 'acceptation' => $acceptation,
                 'categorie_id' => $request->input('categorie'),
                 'date' => $request->input('date'),
-                'localisation' => $request->input('localisation'),
-                'number_of_seats' => $request->input('tickets')
+                'localisation' => $request->input('localisation')
             ]);
 
             return redirect()->route('event.details', $id)->with('actionResponse', 'Your Event Updated Successfully');

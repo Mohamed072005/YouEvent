@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
             $table->float('price');
             $table->integer('place_nbr');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ticket_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('type_id')->constrained('tickets_type')->onDelete('cascade');
             $table->timestamps();
         });
     }

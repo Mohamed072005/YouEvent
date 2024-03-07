@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,7 @@ Route::post('/events', [EventController::class, 'store'])->name('add.event');
 Route::get('/details/{id}', [EventController::class, 'eventDetails'])->name('event.details');
 Route::delete('/destroy/event/{id}', [EventController::class, 'destroy'])->name('delete.event');
 Route::patch('/update/event/{id}', [EventController::class, 'update'])->name('update.event');
+
+
+Route::get('/ticket', [TicketController::class, 'index'])->name('to.add.ticket');
 
