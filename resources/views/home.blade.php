@@ -23,7 +23,6 @@
                                 </div>
                                 <ul class="widget-meeting-points">
                                     <li class="widget-meeting-item"><span>Location: {{$event->localisation}}</span></li>
-                                    <li class="widget-meeting-item"><span>Number of Tickets: {{$event->number_of_seats}}</span></li>
                                     <li class="widget-meeting-item"><span>The Categorie: {{ $event->categorie->categorie_name }}</span></li>
                                 </ul>
                                 <div class="widget-meeting-action">

@@ -24,10 +24,7 @@
                     <input type="date" name="date" id="floatingInput3" class="rounded w-100 form-control form-control-lg" placeholder="#">
                     <label for="floatingInput3">Event Date</label>
                 </div>
-                <div class="form-floating d-flex flex-column align-items-center mb-2">
-                    <input type="number" min="1" name="tickets" id="floatingInput34" class="rounded w-100 form-control form-control-lg" placeholder="#">
-                    <label for="floatingInput4">Number Of Tickets</label>
-                </div>
+
                 <div class="mb-2 mt-2">
                     <label>acceptation</label>
                 </div>

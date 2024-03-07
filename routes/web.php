@@ -43,5 +43,6 @@ Route::delete('/destroy/event/{id}', [EventController::class, 'destroy'])->name(
 Route::patch('/update/event/{id}', [EventController::class, 'update'])->name('update.event');
 
 
-Route::get('/ticket', [TicketController::class, 'index'])->name('to.add.ticket');
+Route::get('/ticket/{id}', [TicketController::class, 'index'])->name('to.add.ticket');
+Route::post('/tickets', [TicketController::class, 'store'])->name('add.ticket');
 
