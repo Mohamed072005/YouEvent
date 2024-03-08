@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Ticket;
+use App\Models\Tickets_type;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -63,12 +64,15 @@ class EventController extends Controller
 
     public function eventDetails($id)
     {
+
         $eventId = $id;
         $event = Event::find($eventId);
-        $tickets = Ticket::all()->where('event_id', $eventId);
+        $tickets = Ticket::where('event_id', $eventId)->get();
+//        dd($tickets);
+        $type = Tickets_type::all();
         $categories = Categorie::all();
 
-        return view('eventDetails', compact('event', 'categories', 'tickets'));
+        return view('eventDetails', compact('event', 'categories', 'tickets', 'type'));
     }
 
     public function destroy(Request $request, $id)
@@ -99,6 +103,10 @@ class EventController extends Controller
             'categorie' => 'required',
             'localisation'=> 'required'
         ]);
+
+        if($request->date < date('Y-m-d')){
+            return redirect()->route('event.details', $id)->with('wrongAdd', 'You trying to insert a invalid date!!');
+        }
 
         if ($request->acceptation == 1){
             $acceptation = true;
