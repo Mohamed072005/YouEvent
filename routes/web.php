@@ -48,4 +48,5 @@ Route::post('/tickets', [TicketController::class, 'store'])->name('add.ticket');
 
 
 Route::get('/find/event', [EventController::class, 'toFindEvent'])->name('to.find.event');
-Route::get('/search', [EventController::class, 'search'])->name('search');
+Route::get('/search', [EventController::class, 'search']);
+Route::get('/categorie/sort', [EventController::class, 'sort']);
