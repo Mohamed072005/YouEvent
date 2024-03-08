@@ -57,7 +57,7 @@ class EventController extends Controller
 
     public function getEvents()
     {
-        $events = Event::all();
+        $events = Event::where('acceptation' , '=' , '0')->paginate(6);
         return view('home', compact('events'));
     }
 

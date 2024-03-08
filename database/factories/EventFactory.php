@@ -21,8 +21,9 @@ class EventFactory extends Factory
             'date' => $this->faker->date,
             'localisation' => $this->faker->city,
             'user_id' => 4,
+            'acceptation' => 0,
+            'status' => 1,
             'categorie_id' => 13,
-            'number_of_seats' => $this->faker->numberBetween(50, 200),
             'created_at' => now(),
             'updated_at' => now(),
         ];
