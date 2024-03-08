@@ -137,4 +137,11 @@ class EventController extends Controller
         $events = Event::where('title', 'LIKE', '%'.$query.'%')->get();
         return view('searchReasult',compact('events'));
     }
+
+    public function sort(Request $request)
+    {
+        $query = $request->input('query_s');
+        $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->get();
+        return view('searchReasult',compact('events'));
+    }
 }

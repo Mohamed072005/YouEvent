@@ -1,3 +1,19 @@
+<style>
+    .widget .widget-meeting-points {
+        font-weight: 400;
+        font-size: 13px;
+        margin-top: .5rem;
+    }
+
+    .widget .widget-meeting-points .widget-meeting-item {
+        color: #727686;
+        display: list-item;
+    }
+
+    .widget .widget-meeting-points .widget-meeting-item span {
+        /*margin-left: .5rem;*/
+    }
+</style>
 <div>
     <div class="container mt-3">
         <div class="row">
