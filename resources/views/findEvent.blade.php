@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div id="searchResult">
+    <div id="searchResult" class="text-center mt-3">
 
     </div>
     <script>
@@ -41,6 +41,11 @@
                         console.log(xhr.responseText);
                     }
                 };
+                if (value == ""){
+                    searchResult.innerText = 'No result';
+                    searchResult.style.color = 'dark';
+                    return;
+                }
                 xhr.send();
         });
     </script>
