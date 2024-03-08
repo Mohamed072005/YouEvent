@@ -122,7 +122,52 @@
                             @endif
                             <div class="col-lg-4 d-flex justify-content-center">
                                 <form action="">
-                                    <button class="btn btn-outline-success">Reserve</button>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reservation">
+                                        Reserve
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="reservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="mb-2">
+                                                            <label>Quantity</label>
+                                                            <input class="form-control" type="text" placeholder="1" aria-label="Disabled input example" disabled>
+                                                        </div>
+                                                        <div class="d-flex flex-column align-items-center mb-2">
+                                                            <select class="form-select" name="type" id="tikiChoise" aria-label="Default select example">
+                                                                <option selected>Tickets Type</option>
+                                                                @foreach($type as $tiType)
+                                                                    <option value="{{ $tiType->id }}">{{ $tiType->type }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroupPrepend2">$</span>
+                                                                </div>
+                                                                <input type="number" class="form-control" name="price" id="tikiPrice" placeholder="Price" aria-describedby="inputGroupPrepend2" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -230,10 +275,25 @@
                 </div>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
             <script>
                 let describArea = document.getElementById('floatingTextarea1');
                 let describInput = document.getElementById('describInput').value;
                 describArea.value = describInput;
+
+                let tikiChoice = document.getElementById('tikiChoise');
+                let tikiPrice = document.getElementById('tikiPrice');
+
+                tikiChoise.addEventListener('change', function (){
+                    console.log(tikiChoise.value);
+                    let value = tikiChoise.value
+                   if (value == 1){
+
+                       tikiPrice.value = "{{ $tickets[0]->price }}"
+                   }else{
+                       tikiPrice.value = "{{ $tickets[1]->price }}"
+                   }
+                });
             </script>
 
             @if($errors->any())
