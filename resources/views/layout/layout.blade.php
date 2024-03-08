@@ -167,7 +167,7 @@
                 <a href="{{ route('to.add.categorie') }}" class="navbar-brand"><h5 class="mt-2">Create Categorie</h5></a>
             </div>
             <div class="">
-                <a class="navbar-brand"><h5 class="mt-2">Find Event</h5></a>
+                <a href="{{ route('to.find.event') }}" class="navbar-brand"><h5 class="mt-2">Find Event</h5></a>
             </div>
         </div>
         <div class="dropdown">

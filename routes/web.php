@@ -46,3 +46,6 @@ Route::patch('/update/event/{id}', [EventController::class, 'update'])->name('up
 Route::get('/ticket/{id}', [TicketController::class, 'index'])->name('to.add.ticket');
 Route::post('/tickets', [TicketController::class, 'store'])->name('add.ticket');
 
+
+Route::get('/find/event', [EventController::class, 'toFindEvent'])->name('to.find.event');
+Route::get('/search', [EventController::class, 'search'])->name('search');

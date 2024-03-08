@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
+    protected $perPage = 2;
     protected $fillable = [
         'title',
         'description',

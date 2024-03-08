@@ -118,4 +118,17 @@ class EventController extends Controller
 
             return redirect()->route('event.details', $id)->with('actionResponse', 'Your Event Updated Successfully');
     }
+
+    public function toFindEvent()
+    {
+        $categories = Categorie::all();
+        return view('findEvent', compact('categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query_s');
+        $events = Event::where('title', 'LIKE', '%'.$query.'%')->get();
+        return view('searchReasult',compact('events'));
+    }
 }

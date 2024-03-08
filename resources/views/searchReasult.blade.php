@@ -1,9 +1,7 @@
-@extends('layout.layout')
-@section('content')
-    <div>
-        <div class="container mt-3">
-            <div class="row">
-                @foreach($events as $event)
+<div>
+    <div class="container mt-3">
+        <div class="row">
+            @foreach($events as $event)
                 <div class="col-lg-4">
                     <div class="card card-margin">
                         <div class="card-body pt-0">
@@ -14,7 +12,7 @@
                                         <span class="widget-date-month">57k</span>
                                     </div>
                                     <div class="widget-meeting-info">
-                                    <h4 class="widget-pro-title">{{$event->title}}</h4>
+                                        <h4 class="widget-pro-title">{{$event->title}}</h4>
                                         <span class="widget-meeting-time">{{$event->date}}</span>
                                     </div>
                                 </div>
@@ -29,31 +27,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
     </div>
-{{--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
-    @if(!session('successResponse') == null)
-        <script>
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "{{ session('successResponse') }}",
-                showConfirmButton: false,
-                timer: 3000
-            });
-        </script>
-    @endif
-    @if(!session('errorResponse') == null)
-        <script>
-            Swal.fire({
-                position: "top-end",
-                icon: "warning",
-                title: "{{ session('errorResponse') }}",
-                showConfirmButton: false,
-                timer: 3000
-            });
-        </script>
-    @endif
-@endsection
+</div>

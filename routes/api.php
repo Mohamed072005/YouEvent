@@ -24,3 +24,5 @@ Route::post('toregister', [AuthController::class, 'register']);
 Route::post('/create/categorie', [CategorieController::class, 'store']);
 Route::get('/destroy/categorie/{id}', [CategorieController::class, 'destroy']);
 Route::put('/update/categorie/{id}', [CategorieController::class, 'update']);
+Route::get('/search', [\App\Http\Controllers\EventController::class, 'search']);
+
