@@ -19,12 +19,12 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        if (session('user_id') == null){
+        if (session('user_id') == null) {
             return redirect()->route('login')->with('errorLogin', 'You should have account to this action');
         }
 
         $event = Event::find($request->event);
-        if (!session('user_id') == $event->user_id){
+        if (!session('user_id') == $event->user_id) {
             return abort(404);
         }
 
@@ -34,14 +34,18 @@ class TicketController extends Controller
             'type' => 'required'
         ]);
 
-        if ($request->type == 1){
+        if ($request->type == 1) {
             $type = 1;
-        }else{
+        } else {
             $type = 2;
         }
         $checkType = Ticket::where('event_id', $request->event)->where('type_id', $type)->first();
-        if ($checkType !== null){
-            return redirect()->route('to.add.ticket', $request->event)->with('wrongAdd', 'a Event with this type of Tickets already stored, Please change the Tickets type!');
+        if ($checkType !== null) {
+            if ($request->next == null) {
+                return redirect()->route('to.add.ticket', $request->event)->with('wrongAdd', 'a Event with this type of Tickets already stored, Please change the Tickets type!');
+            }else{
+                return redirect()->route('event.details', $request->event)->with('wrongAdd', 'a Event with this type of Tickets already stored, Please change the Tickets type!');
+            }
         }
 
         Ticket::create([
@@ -50,6 +54,11 @@ class TicketController extends Controller
             'type_id' => $type,
             'event_id' => $request->event
         ]);
-        return redirect()->route('to.add.ticket', $request->event)->with('addSuccess','Your Tickets Created Successfully');
+
+        if ($request->next == null) {
+            return redirect()->route('to.add.ticket', $request->event)->with('addSuccess', 'Your Tickets Created Successfully');
+        } else {
+            return redirect()->route('event.details', $request->event)->with('actionResponse', 'Your Tickets Created Successfully');
+        }
     }
 }
