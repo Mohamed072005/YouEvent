@@ -32,6 +32,7 @@
                 @endforeach
             </div>
         </div>
+        {{ $events->links('pagination::bootstrap-4') }}
     </div>
 {{--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
     @if(!session('successResponse') == null)
