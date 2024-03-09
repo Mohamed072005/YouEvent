@@ -68,7 +68,6 @@ class EventController extends Controller
         $eventId = $id;
         $event = Event::find($eventId);
         $tickets = Ticket::where('event_id', $eventId)->get();
-//        dd($tickets);
         $type = Tickets_type::all();
         $categories = Categorie::all();
 

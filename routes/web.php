@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,5 @@ Route::post('/tickets', [TicketController::class, 'store'])->name('add.ticket');
 Route::get('/find/event', [EventController::class, 'toFindEvent'])->name('to.find.event');
 Route::get('/search', [EventController::class, 'search']);
 Route::get('/categorie/sort', [EventController::class, 'sort']);
+
+Route::post('/reserve/{id}', [ReservationController::class, 'store'])->name('reserve');
