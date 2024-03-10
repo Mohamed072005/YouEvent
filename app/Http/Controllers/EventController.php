@@ -59,7 +59,7 @@ class EventController extends Controller
 
     public function getEvents()
     {
-        $events = Event::where('acceptation' , '=' , '0')->paginate(6);
+        $events = Event::where('status' , '=' , '1')->paginate(6);
         return view('home', compact('events'));
     }
 
@@ -136,14 +136,14 @@ class EventController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query_s');
-        $events = Event::where('title', 'LIKE', '%'.$query.'%')->get();
+        $events = Event::where('title', 'LIKE', '%'.$query.'%')->where('status', 1)->get();
         return view('searchReasult',compact('events'));
     }
 
     public function sort(Request $request)
     {
         $query = $request->input('query_s');
-        $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->get();
+        $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->where('status', 1)->get();
         return view('searchReasult',compact('events'));
     }
 }

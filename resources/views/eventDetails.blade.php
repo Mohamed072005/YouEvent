@@ -206,6 +206,8 @@
 
                     </div>
                     @endforeach
+                    @if(!session('role_id') == null && !session('user_id') == null)
+                        @if(session('role_id') == 2 && session('user_id') == $event->user_id)
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addTickets">
                             Add Tickets
@@ -258,6 +260,8 @@
                             </div>
                         </div>
                     </div>
+                            @endif
+                        @endif
                 </div>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

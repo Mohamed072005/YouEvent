@@ -1,6 +1,22 @@
 @extends('layout.layout')
 @section('title', 'Dashboard')
 @section('content')
+    @if(!session('role_id') == null)
+        <div class="container-fluid border border-bottom">
+            <div class="container d-flex justify-content-evenly pt-2 pb-2">
+                @if(session('role_id') == 2)
+                    <a href="{{ route('dashboard') }}" class="navbar-a-hover navbar-brand">Statistics</a>
+                    <a href="{{ route('reserve.request') }}" class="navbar-a-hover navbar-brand">Reservations Request</a>
+                    <a href="" class="navbar-a-hover navbar-brand">To About</a>
+                @endif
+                @if(session('role_id') == 1)
+                    <a href="" class="navbar-a-hover navbar-brand">Statistics</a>
+                    <a href="" class="navbar-a-hover navbar-brand">Event Request</a>
+                    <a href="" class="navbar-a-hover navbar-brand">To About</a>
+                @endif
+            </div>
+        </div>
+    @endif
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4 col-xl-3">

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Middleware\adminCategories;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,11 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 
 Route::get('/home', [EventController::class, 'getEvents'])->name('home');
 
-Route::get('/categorie', [CategorieController::class, 'index'])->name('to.add.categorie');
-Route::post('/categories', [CategorieController::class, 'store'])->name('add.categorie');
-Route::get('/categories', [CategorieController::class, 'getCategorie'])->name('get.categorie');
+Route::middleware([adminCategories::class])->group(function (){
+    Route::get('/categorie', [CategorieController::class, 'index'])->name('to.add.categorie');
+    Route::post('/categories', [CategorieController::class, 'store'])->name('add.categorie');
+    Route::get('/categories', [CategorieController::class, 'getCategorie'])->name('get.categorie');
+});
 Route::delete('/destroy/categorie/{id}', [CategorieController::class, 'destroy'])->name('destroy.categorie');
 Route::put('/update/categorie/{id}', [CategorieController::class, 'update'])->name('update.categorie');
 
@@ -54,3 +57,6 @@ Route::get('/categorie/sort', [EventController::class, 'sort']);
 
 Route::post('/reserve/{id}', [ReservationController::class, 'store'])->name('reserve');
 Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');
+Route::get('/reserve/request', [ReservationController::class, 'reserveRequest'])->name('reserve.request');
+Route::post('/accept/reserve/{id}', [ReservationController::class, 'acceptReserve'])->name('accept.reserve');
+Route::post('/refused/reserve/{id}', [ReservationController::class, 'refuseReserve'])->name('refused.reserve');
