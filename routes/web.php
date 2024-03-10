@@ -53,3 +53,4 @@ Route::get('/search', [EventController::class, 'search']);
 Route::get('/categorie/sort', [EventController::class, 'sort']);
 
 Route::post('/reserve/{id}', [ReservationController::class, 'store'])->name('reserve');
+Route::get('/dashboard', [ReservationController::class, 'index'])->name('dashboard');

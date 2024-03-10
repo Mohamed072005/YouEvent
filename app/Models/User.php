@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function reservations()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Reservation::class);
     }
 }

@@ -5,11 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Reservation;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
     //
+    public function index(){
+
+        $user_id = session('user_id');
+        $eventsCount = Event::where('user_id', $user_id)->count();
+        $reservationsCount = Reservation::join('tickets', 'tickets.id', '=', 'reservations.ticket_id')
+            ->join('events', 'events.id', '=', 'tickets.event_id')
+            ->join('users', 'users.id', '=', 'events.user_id')
+            ->where('users.id', $user_id)->count();
+
+
+        return view('organizerDashboard', compact('reservationsCount', 'eventsCount'));
+    }
     public function store(Request $request, $id)
     {
         if (session('user_id') == null){

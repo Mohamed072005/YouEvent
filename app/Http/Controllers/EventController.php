@@ -6,6 +6,7 @@ use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\Tickets_type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
