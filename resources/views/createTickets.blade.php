@@ -12,9 +12,9 @@
                     <input type="number" min="1" name="quantity" id="floatingInput35" class="form-control form-control-lg" placeholder="#">
                     <label for="floatingInput35">Quantity</label>
                 </div>
-                <div class="d-flex flex-column align-items-center mb-2">
-                    <select class="form-select" name="type" aria-label="Default select example">
-                        <option selected>Tickets Type</option>
+                <div class="mt-3 mb-2">
+                    <label>Tickets Type</label>
+                    <select class="form-select mt-2" name="type" aria-label="Default select example">
                         @foreach($type as $tiType)
                         <option value="{{ $tiType->id }}">{{ $tiType->type }}</option>
                         @endforeach
