@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\Ticket;
 use App\Models\Tickets_type;
 use App\Models\User;
@@ -145,5 +146,69 @@ class EventController extends Controller
         $query = $request->input('query_s');
         $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->where('status', 1)->get();
         return view('searchReasult',compact('events'));
+    }
+
+    public function adminStatistics()
+    {
+        $events = Event::count();
+        $users = User::count();
+        $reservations = Reservation::count();
+        $categories = Categorie::count();
+        return view('adminDashboard', compact('events', 'users', 'categories', 'reservations'));
+    }
+
+    public function requestEvent()
+    {
+        $events = Event::where('status', 0)->get();
+        return view('requestEvent', compact('events'));
+    }
+
+    public function acceptEvent($id)
+    {
+        $event = Event::find($id);
+
+        if ($event->status == 0) {
+            $event->status = 1;
+            $event->save();
+        }
+
+        $user = User::find($event->user_id);
+
+        if ($user->role_id == 3){
+            $user->update([
+                'role_id' => 2
+            ]);
+        }
+
+        return redirect()->route('request.event')->with('response', 'accept Successfully');
+    }
+
+    public function refuseEvent($id)
+    {
+        $event = Event::find($id);
+        $event->delete();
+        return redirect()->route('request.event')->with('response', 'refused Successfully');
+    }
+
+    public function blockUsers()
+    {
+        $users = User::all();
+        return view('blockUsers', compact('users'));
+    }
+
+    public function blockUserAction($id)
+    {
+        $user = User::find($id);
+//        dd($user);
+        if($user->role_id != 4){
+            $user->role_id=4;
+            $user->save();
+            return redirect()->route('block.users')->with('action', 'User Blocked Successfully');
+        }else{
+            $user->role_id=3;
+            $user->save();
+
+            return redirect()->route('block.users')->with('action', 'User Unblocked Successfully');
+        }
     }
 }

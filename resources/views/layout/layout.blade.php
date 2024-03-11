@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <style>
         body {
             background: #F4F7FD;
@@ -246,16 +246,16 @@
                     @endif
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-
+                    @if(!session('user_id') == null)
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-
-                    <li><a class="dropdown-item" href="">Login</a></li>
-
+                    @else
+                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -279,6 +279,15 @@
             <div class="offcanvas-body">
                 <div class="">
                     <aside class="aside p-2">
+                        @if(!session('role_id') == null)
+                        @if(session('role_id') == 1)
+                        <div class="">
+                            <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                                <h4 class="">Admin Dashboard</h4>
+                            </a>
+                        </div>
+                        @endif
+                        @endif
                         <div class="">
                             <a class="navbar-brand" href="{{ route('dashboard') }}">
                                 <h4 class="">Dashboard</h4>
