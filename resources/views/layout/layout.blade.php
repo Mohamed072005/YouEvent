@@ -299,8 +299,8 @@
                             </a>
                         </div>
                         <div class="">
-                            <a>
-                                <h4 class="">settings</h4>
+                            <a class="navbar-brand" href="{{ route('get.tickets') }}">
+                                <h4 class="">Your Tickets</h4>
                             </a>
                         </div>
                     </aside>

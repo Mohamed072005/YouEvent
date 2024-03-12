@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'dashboard' =>\App\Http\Middleware\Dashboard::class,
         'admindashboard' =>\App\Http\Middleware\AdminDashboard::class,
         'blocked' =>\App\Http\Middleware\blocked::class,
+        'organizerUser' =>\App\Http\Middleware\OrganizerUser::class,
     ];
 }

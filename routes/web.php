@@ -39,7 +39,6 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 
 Route::middleware([adminCategories::class])->group(function (){
     //Admin categories with create and delete and update and display Categories
-
     Route::get('/categorie', [CategorieController::class, 'index'])->name('to.add.categorie');
     Route::post('/categories', [CategorieController::class, 'store'])->name('add.categorie');
     Route::get('/categories', [CategorieController::class, 'getCategorie'])->name('get.categorie');
@@ -51,8 +50,6 @@ Route::middleware([adminCategories::class])->group(function (){
 
 Route::middleware([\App\Http\Middleware\blocked::class])->group(function (){
     Route::get('/home', [EventController::class, 'getEvents'])->name('home');
-    Route::get('/event', [EventController::class, 'index'])->name('to.add.event');
-    Route::post('/events', [EventController::class, 'store'])->name('add.event');
     Route::get('/details/{id}', [EventController::class, 'eventDetails'])->name('event.details');
     Route::delete('/destroy/event/{id}', [EventController::class, 'destroy'])->name('delete.event');
     Route::patch('/update/event/{id}', [EventController::class, 'update'])->name('update.event');
@@ -95,5 +92,12 @@ Route::middleware([AdminDashboard::class])->group(function (){
     Route::get('/block/users', [EventController::class, 'blockUsers'])->name('block.users');
     Route::post('/block/{id}', [EventController::class, 'blockUserAction'])->name('block');
 });
+
+Route::middleware([\App\Http\Middleware\OrganizerUser::class])->group(function (){
+    Route::get('/user/tickets', [ReservationController::class, 'userTickets'])->name('get.tickets');
+    Route::get('/event', [EventController::class, 'index'])->name('to.add.event');
+    Route::post('/events', [EventController::class, 'store'])->name('add.event');
+});
+
 
 

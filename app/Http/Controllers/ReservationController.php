@@ -109,4 +109,14 @@ class ReservationController extends Controller
         $reservation->delete();
         return redirect()->route('reserve.request')->with('actionSuccess', 'Refused Success');
     }
+
+    public function userTickets()
+    {
+        if (session('user_id') == null){
+            return redirect()->route('login')->with('errorLogin', 'You should have account to this action');
+        }
+
+        $reservations = Reservation::where('user_id', session('user_id'))->get();
+        return view('reservationTicket', compact('reservations'));
+    }
 }
