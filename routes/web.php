@@ -89,8 +89,8 @@ Route::middleware([AdminDashboard::class])->group(function (){
     Route::get('/request/event', [EventController::class, 'requestEvent'])->name('request.event');
     Route::post('/accept/event/{id}', [EventController::class, 'acceptEvent'])->name('accept.event');
     Route::post('/refuse/event/{id}', [EventController::class, 'refuseEvent'])->name('refuse.event');
-    Route::get('/block/users', [EventController::class, 'blockUsers'])->name('block.users');
-    Route::post('/block/{id}', [EventController::class, 'blockUserAction'])->name('block');
+    Route::get('/block/users', [AuthController::class, 'blockUsers'])->name('block.users');
+    Route::post('/block/{id}', [AuthController::class, 'blockUserAction'])->name('block');
 });
 
 Route::middleware([\App\Http\Middleware\OrganizerUser::class])->group(function (){

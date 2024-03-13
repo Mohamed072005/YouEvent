@@ -189,26 +189,4 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('request.event')->with('response', 'refused Successfully');
     }
-
-    public function blockUsers()
-    {
-        $users = User::all();
-        return view('blockUsers', compact('users'));
-    }
-
-    public function blockUserAction($id)
-    {
-        $user = User::find($id);
-//        dd($user);
-        if($user->role_id != 4){
-            $user->role_id=4;
-            $user->save();
-            return redirect()->route('block.users')->with('action', 'User Blocked Successfully');
-        }else{
-            $user->role_id=3;
-            $user->save();
-
-            return redirect()->route('block.users')->with('action', 'User Unblocked Successfully');
-        }
-    }
 }

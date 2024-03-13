@@ -116,7 +116,7 @@
                 <!--BEGIN CONTENT-->
                 <div class="inner-circle"><i class="fa fa-cogs"></i><span>403</span></div>
                 <span class="inner-status">Sorry, something went wrong!</span>
-                <span class="inner-detail">Your Account has been blocked</span>
+                <span class="inner-detail">Your account has been temporarily suspended.</span>
                 <!--END CONTENT-->
             </div>
         </div>

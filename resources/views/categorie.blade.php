@@ -15,12 +15,11 @@
                             <div class="widget">
                                 <div class="widget-title-wrapper">
                                     <div class="widget-date-primary">
-                                        <span class="widget-date-day">09</span>
-                                        <span class="widget-date-month">apr</span>
+                                        <span class="widget-date-day">G</span>
+{{--                                        <span class="widget-date-month">t</span>--}}
                                     </div>
                                     <div class="widget-meeting-info">
-                                        <span class="widget-pro-title">PRO-08235 DeskOpe. Website</span>
-                                        <span class="widget-meeting-time">12:00 to 13.30 Hrs</span>
+                                        <span class="widget-meeting-time">{{ $cateInfo->created_at }}</span>
                                     </div>
                                 </div>
                                 <div class="widget-meeting-action">
