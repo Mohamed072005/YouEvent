@@ -30,6 +30,7 @@
                     </div>
                 </div>
                 <!-- actions -->
+                @if(session('role_id') != 1)
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row d-flex justify-content-center">
@@ -120,7 +121,10 @@
 
                             </div>
                             @endif
+
+                            @if($event->user_id != session('user_id'))
                             <div class="col-lg-4 d-flex justify-content-center">
+
                                 <div>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reservation">
@@ -147,7 +151,7 @@
                                                             <label>Tickets Type</label>
                                                             <select class="form-select mt-2" name="type" aria-label="Default select example">
                                                                 @foreach($tickets as $tiType)
-                                                                    <option value="{{ $tiType->tickets_type->id }}">{{ $tiType->tickets_type->type }}</option>
+                                                                <option value="{{ $tiType->tickets_type->id }}">{{ $tiType->tickets_type->type }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -165,10 +169,13 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="col-lg-4">
                 <div class="card mb-3 shadow">
@@ -206,6 +213,8 @@
 
                     </div>
                     @endforeach
+                    @if(!session('role_id') == null && !session('user_id') == null)
+                    @if(session('role_id') == 2 && session('user_id') == $event->user_id)
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addTickets">
                             Add Tickets
@@ -258,6 +267,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @endif
                 </div>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
