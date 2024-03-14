@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\Ticket;
 use App\Models\Tickets_type;
 use App\Models\User;
@@ -59,7 +60,7 @@ class EventController extends Controller
 
     public function getEvents()
     {
-        $events = Event::where('acceptation' , '=' , '0')->paginate(6);
+        $events = Event::where('status' , '=' , '1')->paginate(6);
         return view('home', compact('events'));
     }
 
@@ -136,14 +137,56 @@ class EventController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query_s');
-        $events = Event::where('title', 'LIKE', '%'.$query.'%')->get();
+        $events = Event::where('title', 'LIKE', '%'.$query.'%')->where('status', 1)->get();
         return view('searchReasult',compact('events'));
     }
 
     public function sort(Request $request)
     {
         $query = $request->input('query_s');
-        $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->get();
+        $events = Event::where('categorie_id', 'LIKE', '%'.$query.'%')->where('status', 1)->get();
         return view('searchReasult',compact('events'));
+    }
+
+    public function adminStatistics()
+    {
+        $events = Event::count();
+        $users = User::count();
+        $reservations = Reservation::count();
+        $categories = Categorie::count();
+        return view('adminDashboard', compact('events', 'users', 'categories', 'reservations'));
+    }
+
+    public function requestEvent()
+    {
+        $events = Event::where('status', 0)->get();
+        return view('requestEvent', compact('events'));
+    }
+
+    public function acceptEvent($id)
+    {
+        $event = Event::find($id);
+
+        if ($event->status == 0) {
+            $event->status = 1;
+            $event->save();
+        }
+
+        $user = User::find($event->user_id);
+
+        if ($user->role_id == 3){
+            $user->update([
+                'role_id' => 2
+            ]);
+        }
+
+        return redirect()->route('request.event')->with('response', 'accept Successfully');
+    }
+
+    public function refuseEvent($id)
+    {
+        $event = Event::find($id);
+        $event->delete();
+        return redirect()->route('request.event')->with('response', 'refused Successfully');
     }
 }

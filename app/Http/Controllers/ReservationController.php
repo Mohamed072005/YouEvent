@@ -64,10 +64,59 @@ class ReservationController extends Controller
         ]);
 
         if($status == 1){
-            return redirect()->route('event.details', $id)->with('wrongAdd', 'Your reservation is in the waiting section');
-        }else {
             return redirect()->route('event.details', $id)->with('actionResponse', 'Reserve Success');
+        }else {
+            return redirect()->route('event.details', $id)->with('wrongAdd', 'Your reservation is in the waiting section');
+        }
+    }
+
+    public function reserveRequest()
+    {
+        $user_id = session('user_id');
+        $reservations = Reservation::join('tickets', 'tickets.id', '=', 'reservations.ticket_id')
+            ->join('events', 'events.id', '=', 'tickets.event_id')
+            ->join('users as event_user', 'event_user.id', '=', 'events.user_id')
+            ->join('users as reservation_user', 'reservation_user.id', '=', 'reservations.user_id')
+            ->where('event_user.id', $user_id)->where('reservations.status', 0)
+            ->get([
+                'reservation_user.name as name',
+                'title',
+                'reservations.created_at',
+                'reservations.id'
+
+            ]);
+        return view('reserveRequest', compact('reservations'));
+    }
+
+    public function acceptReserve($id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->update([
+            'status' => 1
+        ]);
+
+        return redirect()->route('reserve.request')->with('actionSuccess', 'Accept Success');
+    }
+
+    public function refuseReserve($id)
+    {
+        $reservation = Reservation::find($id);
+        $ticket = Ticket::find($reservation->ticket_id);
+        $ticket->update([
+            'place_nbr' => $ticket->place_nbr + 1
+        ]);
+
+        $reservation->delete();
+        return redirect()->route('reserve.request')->with('actionSuccess', 'Refused Success');
+    }
+
+    public function userTickets()
+    {
+        if (session('user_id') == null){
+            return redirect()->route('login')->with('errorLogin', 'You should have account to this action');
         }
 
+        $reservations = Reservation::where('user_id', session('user_id'))->get();
+        return view('reservationTicket', compact('reservations'));
     }
 }

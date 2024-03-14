@@ -121,5 +121,25 @@ class AuthController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
+    public function blockUsers()
+    {
+        $users = User::where('role_id', '!=', '1')->get();
+        return view('blockUsers', compact('users'));
+    }
 
+    public function blockUserAction($id)
+    {
+        $user = User::find($id);
+//        dd($user);
+        if($user->role_id != 4){
+            $user->role_id=4;
+            $user->save();
+            return redirect()->route('block.users')->with('action', 'User Blocked Successfully');
+        }else{
+            $user->role_id=3;
+            $user->save();
+
+            return redirect()->route('block.users')->with('action', 'User Unblocked Successfully');
+        }
+    }
 }
